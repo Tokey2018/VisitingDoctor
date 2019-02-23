@@ -1,0 +1,110 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/visitingdoctor/tDiagnosis/"}){ -->
+
+<form class="layui-form layui-form-pane" id="updateForm">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">patientid</label>
+				<div class="layui-input-inline">
+					<input type="text" id="patientid" name="patientid"  value="${tDiagnosis.patientid}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">patientname</label>
+				<div class="layui-input-inline">
+					<input type="text" id="patientname" name="patientname"  value="${tDiagnosis.patientname}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">doctorid</label>
+				<div class="layui-input-inline">
+					<input type="text" id="doctorid" name="doctorid"  value="${tDiagnosis.doctorid}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">doctorname</label>
+				<div class="layui-input-inline">
+					<input type="text" id="doctorname" name="doctorname"  value="${tDiagnosis.doctorname}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">symptomflags1</label>
+				<div class="layui-input-inline">
+					<input type="text" id="symptomflags1" name="symptomflags1"  value="${tDiagnosis.symptomflags1}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">immode</label>
+				<div class="layui-input-inline">
+					<input type="text" id="immode" name="immode"  value="${tDiagnosis.immode}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">medicinetype</label>
+				<div class="layui-input-inline">
+					<input type="text" id="medicinetype" name="medicinetype"  value="${tDiagnosis.medicinetype}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">treatmenttype</label>
+				<div class="layui-input-inline">
+					<input type="text" id="treatmenttype" name="treatmenttype"  value="${tDiagnosis.treatmenttype}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">starttime</label>
+				<div class="layui-input-inline">
+					<input type="text" id="starttime" name="starttime"  value="${tDiagnosis.starttime,"yyyy-MM-dd"}"   class="layui-input input-date" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">endtime</label>
+				<div class="layui-input-inline">
+					<input type="text" id="endtime" name="endtime"  value="${tDiagnosis.endtime,"yyyy-MM-dd"}"   class="layui-input input-date" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">status</label>
+				<div class="layui-input-inline">
+					<input type="text" id="status" name="status"  value="${tDiagnosis.status}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">createtime</label>
+				<div class="layui-input-inline">
+					<input type="text" id="createtime" name="createtime"  value="${tDiagnosis.createtime,"yyyy-MM-dd"}"   class="layui-input input-date" >
+				</div>
+            </div>
+        </div>
+    </div>
+	<!-- 业务对象须有hidden字段，保存delFlag和version字段-->
+    <input type="hidden" name="rid" value=${tDiagnosis.rid} />
+    <layui:submitButtons id="updateButton" />
+</form>
+<!--#} -->
+<script>
+layui.use(['edit'], function(){
+    var tDiagnosisEdit = layui.edit
+    tDiagnosisEdit.init();
+});
+</script>

@@ -1,0 +1,94 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/visitingdoctor/tVisit/"}){ -->
+
+<form class="layui-form layui-form-pane" id="updateForm">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">patientid</label>
+				<div class="layui-input-inline">
+					<input type="text" id="patientid" name="patientid"  value="${tVisit.patientid}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">patientname</label>
+				<div class="layui-input-inline">
+					<input type="text" id="patientname" name="patientname"  value="${tVisit.patientname}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">symptomflags1</label>
+				<div class="layui-input-inline">
+					<input type="text" id="symptomflags1" name="symptomflags1"  value="${tVisit.symptomflags1}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">immode</label>
+				<div class="layui-input-inline">
+					<input type="text" id="immode" name="immode"  value="${tVisit.immode}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">medicinetype</label>
+				<div class="layui-input-inline">
+					<input type="text" id="medicinetype" name="medicinetype"  value="${tVisit.medicinetype}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">treatmenttype</label>
+				<div class="layui-input-inline">
+					<input type="text" id="treatmenttype" name="treatmenttype"  value="${tVisit.treatmenttype}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">starttime</label>
+				<div class="layui-input-inline">
+					<input type="text" id="starttime" name="starttime"  value="${tVisit.starttime,"yyyy-MM-dd"}"   class="layui-input input-date" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">endtime</label>
+				<div class="layui-input-inline">
+					<input type="text" id="endtime" name="endtime"  value="${tVisit.endtime,"yyyy-MM-dd"}"   class="layui-input input-date" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">timetype</label>
+				<div class="layui-input-inline">
+					<input type="text" id="timetype" name="timetype"  value="${tVisit.timetype}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">createtime</label>
+				<div class="layui-input-inline">
+					<input type="text" id="createtime" name="createtime"  value="${tVisit.createtime,"yyyy-MM-dd"}"   class="layui-input input-date" >
+				</div>
+            </div>
+        </div>
+    </div>
+	<!-- 业务对象须有hidden字段，保存delFlag和version字段-->
+    <input type="hidden" name="rid" value=${tVisit.rid} />
+    <layui:submitButtons id="updateButton" />
+</form>
+<!--#} -->
+<script>
+layui.use(['edit'], function(){
+    var tVisitEdit = layui.edit
+    tVisitEdit.init();
+});
+</script>

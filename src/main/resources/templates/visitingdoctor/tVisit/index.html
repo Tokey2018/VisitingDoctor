@@ -1,0 +1,20 @@
+<!--#layout("/common/layout.html",{"jsBase":"/js/visitingdoctor/tVisit/"}){ -->
+<layui:searchForm formId="searchForm"  condition="${search}">
+</layui:searchForm>
+
+<div class="layui-btn-group">
+    <layui:accessButton function="tVisit.add"  action="add">增加</layui:accessButton>
+    <layui:accessButton function="tVisit.edit"  action="edit">编辑</layui:accessButton>
+    <layui:accessButton function="tVisit.del"  action="del">删除</layui:accessButton>
+</div>
+
+<table id="tVisitTable" lay-filter="tVisitTable"></table>
+<!--#} -->
+<script>
+
+layui.use(['index'], function(){
+    var index = layui.index
+    index.init();
+});
+
+</script>

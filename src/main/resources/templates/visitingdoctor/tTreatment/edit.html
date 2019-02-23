@@ -1,0 +1,104 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/visitingdoctor/tTreatment/"}){ -->
+
+<form class="layui-form layui-form-pane" id="updateForm">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">doctorid</label>
+				<div class="layui-input-inline">
+					<input type="text" id="doctorid" name="doctorid"  value="${tTreatment.doctorid}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">doctorname</label>
+				<div class="layui-input-inline">
+					<input type="text" id="doctorname" name="doctorname"  value="${tTreatment.doctorname}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">symptomflags1</label>
+				<div class="layui-input-inline">
+					<input type="text" id="symptomflags1" name="symptomflags1"  value="${tTreatment.symptomflags1}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">immode</label>
+				<div class="layui-input-inline">
+					<input type="text" id="immode" name="immode"  value="${tTreatment.immode}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">medicinetype</label>
+				<div class="layui-input-inline">
+					<input type="text" id="medicinetype" name="medicinetype"  value="${tTreatment.medicinetype}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">treatmenttype</label>
+				<div class="layui-input-inline">
+					<input type="text" id="treatmenttype" name="treatmenttype"  value="${tTreatment.treatmenttype}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">starttime</label>
+				<div class="layui-input-inline">
+					<input type="text" id="starttime" name="starttime"  value="${tTreatment.starttime,"yyyy-MM-dd"}"   class="layui-input input-date" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">endtime</label>
+				<div class="layui-input-inline">
+					<input type="text" id="endtime" name="endtime"  value="${tTreatment.endtime,"yyyy-MM-dd"}"   class="layui-input input-date" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">timetype</label>
+				<div class="layui-input-inline">
+					<input type="text" id="timetype" name="timetype"  value="${tTreatment.timetype}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">status</label>
+				<div class="layui-input-inline">
+					<input type="text" id="status" name="status"  value="${tTreatment.status}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">createtime</label>
+				<div class="layui-input-inline">
+					<input type="text" id="createtime" name="createtime"  value="${tTreatment.createtime,"yyyy-MM-dd"}"   class="layui-input input-date" >
+				</div>
+            </div>
+        </div>
+    </div>
+	<!-- 业务对象须有hidden字段，保存delFlag和version字段-->
+    <input type="hidden" name="rid" value=${tTreatment.rid} />
+    <layui:submitButtons id="updateButton" />
+</form>
+<!--#} -->
+<script>
+layui.use(['edit'], function(){
+    var tTreatmentEdit = layui.edit
+    tTreatmentEdit.init();
+});
+</script>

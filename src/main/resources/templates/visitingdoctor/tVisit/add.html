@@ -1,0 +1,92 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/visitingdoctor/tVisit/"}){ -->
+
+<form class="layui-form layui-form-pane" id="addForm">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">patientid</label>
+				<div class="layui-input-inline">
+					<input type="text" name="patientid" class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">patientname</label>
+				<div class="layui-input-inline">
+					<input type="text" name="patientname" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">symptomflags1</label>
+				<div class="layui-input-inline">
+					<input type="text" name="symptomflags1" class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">immode</label>
+				<div class="layui-input-inline">
+					<input type="text" name="immode" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">medicinetype</label>
+				<div class="layui-input-inline">
+					<input type="text" name="medicinetype" class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">treatmenttype</label>
+				<div class="layui-input-inline">
+					<input type="text" name="treatmenttype" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">starttime</label>
+				<div class="layui-input-inline">
+					<input type="text" name="starttime" class="layui-input input-date" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">endtime</label>
+				<div class="layui-input-inline">
+					<input type="text" name="endtime" class="layui-input input-date" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">timetype</label>
+				<div class="layui-input-inline">
+					<input type="text" name="timetype" class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">createtime</label>
+				<div class="layui-input-inline">
+					<input type="text" name="createtime" class="layui-input input-date" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <layui:submitButtons id="addButton" />
+</form>
+<!--#} -->
+<script>
+layui.use(['add'], function(){
+    var tVisitAdd = layui.add
+    tVisitAdd.init();
+});
+</script>

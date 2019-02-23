@@ -1,0 +1,20 @@
+<!--#layout("/common/layout.html",{"jsBase":"/js/visitingdoctor/tMedicalRecord/"}){ -->
+<layui:searchForm formId="searchForm"  condition="${search}">
+</layui:searchForm>
+
+<div class="layui-btn-group">
+    <layui:accessButton function="tMedicalRecord.add"  action="add">增加</layui:accessButton>
+    <layui:accessButton function="tMedicalRecord.edit"  action="edit">编辑</layui:accessButton>
+    <layui:accessButton function="tMedicalRecord.del"  action="del">删除</layui:accessButton>
+</div>
+
+<table id="tMedicalRecordTable" lay-filter="tMedicalRecordTable"></table>
+<!--#} -->
+<script>
+
+layui.use(['index'], function(){
+    var index = layui.index
+    index.init();
+});
+
+</script>

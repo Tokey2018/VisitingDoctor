@@ -1,0 +1,62 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/visitingdoctor/tMedicalRecord/"}){ -->
+
+<form class="layui-form layui-form-pane" id="updateForm">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">diagnosisid</label>
+				<div class="layui-input-inline">
+					<input type="text" id="diagnosisid" name="diagnosisid"  value="${tMedicalRecord.diagnosisid}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">recordype</label>
+				<div class="layui-input-inline">
+					<input type="text" id="recordype" name="recordype"  value="${tMedicalRecord.recordype}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">filename</label>
+				<div class="layui-input-inline">
+					<input type="text" id="filename" name="filename"  value="${tMedicalRecord.filename}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">filetype</label>
+				<div class="layui-input-inline">
+					<input type="text" id="filetype" name="filetype"  value="${tMedicalRecord.filetype}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">filepath</label>
+				<div class="layui-input-inline">
+					<input type="text" id="filepath" name="filepath"  value="${tMedicalRecord.filepath}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">createtime</label>
+				<div class="layui-input-inline">
+					<input type="text" id="createtime" name="createtime"  value="${tMedicalRecord.createtime,"yyyy-MM-dd"}"   class="layui-input input-date" >
+				</div>
+            </div>
+        </div>
+    </div>
+	<!-- 业务对象须有hidden字段，保存delFlag和version字段-->
+    <input type="hidden" name="rid" value=${tMedicalRecord.rid} />
+    <layui:submitButtons id="updateButton" />
+</form>
+<!--#} -->
+<script>
+layui.use(['edit'], function(){
+    var tMedicalRecordEdit = layui.edit
+    tMedicalRecordEdit.init();
+});
+</script>
