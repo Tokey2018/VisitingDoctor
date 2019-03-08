@@ -154,15 +154,7 @@ public class TTestController {
         visit.setMedicinetype(1);
         visit.setTreatmenttype(1);
         TTreatment treat = new TTreatment();
-        treat.setDoctorid(1l);
-        treat.setSymptomflags1(1l);
-        treat.setImmode(1);
-        treat.setMedicinetype(1);
-        treat.setTreatmenttype(1);
-        treat.setStarttime(new Date());
-        treat.setEndtime(new Date());
-        treat.setTimetype(1);
-        treat.setStatus(2);
+        treat.setRid(1l);
         TDiagnosis dg = tInterrogationService.acceptPatient(visit, treat);
         if(dg == null){
             return JsonResult.failMessage("accept patient failed");
@@ -177,17 +169,6 @@ public class TTestController {
     public JsonResult<String> cancelDiagnosis() {
         TDiagnosis dg = new TDiagnosis();
         dg.setRid(1l);
-        dg.setPatientid(1l);
-        dg.setDoctorid(1l);
-        dg.setSymptomflags1(1l);
-        dg.setImmode(1);
-        dg.setMedicinetype(1);
-        dg.setTreatmenttype(1);
-        dg.setStarttime(new Date());
-        dg.setEndtime(new Date());
-        dg.setStatus(2);
-        dg.setDelFlag(0);
-        dg.setCreatetime(new Date());
         if(!tInterrogationService.cancelDiagnosis(dg, TDiagnosis.CANCEL)){
             return JsonResult.failMessage("cancel patient failed");
         }else{

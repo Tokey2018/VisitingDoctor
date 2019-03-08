@@ -75,8 +75,9 @@ public class TDiagnosis extends BaseEntity{
 	@LogicDelete(value = 1)
 
     private Integer delFlag ;
-	
 
+
+    @InsertIgnore
     private Date createtime ;
 	
     public TDiagnosis()

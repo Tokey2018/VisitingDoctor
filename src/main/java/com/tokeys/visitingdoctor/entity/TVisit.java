@@ -66,8 +66,8 @@ public class TVisit extends BaseEntity{
 	@LogicDelete(value = 1)
 
     private Integer delFlag ;
-	
 
+    @InsertIgnore
     private Date createtime ;
 	
     public TVisit()

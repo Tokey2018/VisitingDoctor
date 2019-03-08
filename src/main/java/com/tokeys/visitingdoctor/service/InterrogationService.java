@@ -66,7 +66,12 @@ public class InterrogationService extends BaseService<TDiagnosis>{
         visit.setTimetype(0);
         visit.setStarttime(cond.getStartTime());
         visit.setEndtime(cond.getEndTime());
-        tVisitDao.insert(visit);
+        try {
+            tVisitDao.insert(visit, true);
+        }catch(Exception e){
+            logger.error("insert visit error: {}", e.getMessage());
+            return null;
+        }
         return visit;
     }
 
@@ -129,10 +134,9 @@ public class InterrogationService extends BaseService<TDiagnosis>{
             treatment.setDoctorname(doc.getName());
             treatment.setVisittimes(0);
             treatment.setDiagtimes(0);
-            treatment.setCreatetime(new Date());
             setTreatmentByCond(treatment, cond);
             try {
-                tTreatmentDao.insert(treatment);
+                tTreatmentDao.insert(treatment, true);
             }catch(Exception e){
                 logger.error("insert treatment for doctor {} error: {}", doc.getRid(), e.getMessage());
                 return null;
@@ -202,10 +206,23 @@ public class InterrogationService extends BaseService<TDiagnosis>{
     }
 
     public TDiagnosis acceptPatient(TVisit visit, TTreatment treat){
-        if(visit==null || visit.getPatientid() <= 0 || treat == null || treat.getDoctorid() <= 0){
+        if(visit==null || visit.getPatientid() <= 0 || treat == null || treat.getRid() <= 0){
             logger.info("parameter is invalid");
             return null;
         }
+        treat = tTreatmentDao.single(treat.getRid());
+        if(treat == null){
+            logger.info("get treatment {} failed", treat.getRid());
+            return null;
+        }
+        treat.setVisittimes(treat.getVisittimes() + 1);
+        try{
+            tTreatmentDao.updateById(treat);
+        }catch(Exception e){
+            logger.error("update visit times for doctor {} error: {}", treat.getDoctorid(), e.getMessage());
+            return null;
+        }
+
         TDiagnosis dg = new TDiagnosis();
         dg.setPatientid(visit.getPatientid());
         dg.setPatientname(visit.getPatientname());
@@ -218,20 +235,23 @@ public class InterrogationService extends BaseService<TDiagnosis>{
         dg.setStarttime(visit.getStarttime());
         dg.setEndtime(visit.getEndtime());
         dg.setStatus(TDiagnosis.NORMAL);
-        dg.setDelFlag(0);
         try {
-            dg.setCreatetime(new Date());
+            tDiagnosisDao.insert(dg, true);
         }catch(Exception e){
             logger.error("insert diagnosis error: {}", e.getMessage());
             return null;
         }
-        tDiagnosisDao.insert(dg);
         return dg;
     }
 
     public boolean cancelDiagnosis(TDiagnosis diag, int flag){
         if(diag == null || diag.getRid() <= 0 || flag != TDiagnosis.PAUSE && flag != TDiagnosis.CANCEL){
             logger.info("parameter is invalid");
+            return false;
+        }
+        diag = tDiagnosisDao.single(diag.getRid());
+        if(diag == null){
+            logger.info("get diagnosis {} failed", diag.getRid());
             return false;
         }
         diag.setStatus(flag);
@@ -250,9 +270,8 @@ public class InterrogationService extends BaseService<TDiagnosis>{
             return null;
         }
         mr.setDiagnosisid(diag.getRid());
-        mr.setDelFlag(0);
         try {
-            tMedicalRecordDao.insert(mr);
+            tMedicalRecordDao.insert(mr, true);
         }catch(Exception e){
             logger.error("make record error: {}", e.getMessage());
             return null;
