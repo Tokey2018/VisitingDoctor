@@ -15,4 +15,6 @@ import  com.tokeys.visitingdoctor.entity.*;
 public interface TTreatmentDao extends BaseMapper<TTreatment>{
     public PageQuery<TTreatment> queryByCondition(PageQuery query);
     public void batchDelTTreatmentByIds( List<Long> ids);
+    public List<TTreatment> getByDoctorId(Long doctorid);
+    public List<TTreatment> matchDoctor(TVisit visit);
 }

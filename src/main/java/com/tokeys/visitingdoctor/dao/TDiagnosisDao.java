@@ -1,12 +1,12 @@
 package com.tokeys.visitingdoctor.dao;
 
-import java.util.List;
-
+import com.tokeys.visitingdoctor.entity.TDiagnosis;
+import com.tokeys.visitingdoctor.entity.TVisit;
 import org.beetl.sql.core.annotatoin.SqlResource;
-import org.beetl.sql.core.mapper.BaseMapper;
 import org.beetl.sql.core.engine.PageQuery;
+import org.beetl.sql.core.mapper.BaseMapper;
 
-import  com.tokeys.visitingdoctor.entity.*;
+import java.util.List;
 
 /**
  * TDiagnosis Dao
@@ -15,4 +15,5 @@ import  com.tokeys.visitingdoctor.entity.*;
 public interface TDiagnosisDao extends BaseMapper<TDiagnosis>{
     public PageQuery<TDiagnosis> queryByCondition(PageQuery query);
     public void batchDelTDiagnosisByIds( List<Long> ids);
+    public List<Long> searchHistoryDoctor(TVisit cond);
 }

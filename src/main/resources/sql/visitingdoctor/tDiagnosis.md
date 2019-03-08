@@ -21,3 +21,12 @@ batchDelTDiagnosisByIds
 
     update t_diagnosis set del_flag = 1 where rid  in( #join(ids)#)
     
+
+searchHistoryDoctor
+===
+select doctorId from t_diagnosis where del_flag=0 
+    and patientId=#patientid# and (symptomFlags1 & #symptomflags1# > 0)
+    and imMode=#immode# and medicineType=#medicinetype# and treatmentType=#treatmenttype#
+    and ((startTime<=#starttime# and endTime>=#starttime#)
+        or (startTime<=#endtime# and endTime>=#endtime#))
+    group by doctorId

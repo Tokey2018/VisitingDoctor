@@ -85,6 +85,16 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
                 },
                 {
 
+                    field : 'visittimes', 
+                        title : 'visittimes',
+                },
+                {
+
+                    field : 'diagtimes', 
+                        title : 'diagtimes',
+                },
+                {
+
                     field : 'createtime', 
                         title : 'createtime',
                 }

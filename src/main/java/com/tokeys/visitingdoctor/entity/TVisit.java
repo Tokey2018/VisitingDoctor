@@ -24,7 +24,7 @@ import org.beetl.sql.core.annotatoin.LogicDelete;
 
 /* 
 * 
-* gen by Spring Boot2 Admin 2019-02-23
+* gen by Spring Boot2 Admin 2019-03-04
 */
 public class TVisit extends BaseEntity{
 
@@ -60,6 +60,12 @@ public class TVisit extends BaseEntity{
 	
 
     private Integer timetype ;
+	
+	/*逻辑删除标志*/
+	@InsertIgnore
+	@LogicDelete(value = 1)
+
+    private Integer delFlag ;
 	
 
     private Date createtime ;
@@ -136,6 +142,13 @@ public class TVisit extends BaseEntity{
     }
     public void setTimetype(Integer timetype){
         this.timetype = timetype;
+    }
+
+    public Integer getDelFlag(){
+	    return  delFlag;
+    }
+    public void setDelFlag(Integer delFlag){
+        this.delFlag = delFlag;
     }
 
     public Date getCreatetime(){

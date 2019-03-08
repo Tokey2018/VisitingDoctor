@@ -24,9 +24,12 @@ import org.beetl.sql.core.annotatoin.LogicDelete;
 
 /* 
 * 
-* gen by Spring Boot2 Admin 2019-02-23
+* gen by Spring Boot2 Admin 2019-03-04
 */
 public class TDiagnosis extends BaseEntity{
+    public static final int NORMAL = 1;
+    public static final int PAUSE = 2;
+    public static final int CANCEL = 3;
 
     @NotNull(message = "ID不能为空", groups =ValidateConfig.UPDATE.class)
     @SeqID(name = ORACLE_CORE_SEQ_NAME)
@@ -66,6 +69,12 @@ public class TDiagnosis extends BaseEntity{
 	
 
     private Integer status ;
+	
+	/*逻辑删除标志*/
+	@InsertIgnore
+	@LogicDelete(value = 1)
+
+    private Integer delFlag ;
 	
 
     private Date createtime ;
@@ -156,6 +165,13 @@ public class TDiagnosis extends BaseEntity{
     }
     public void setStatus(Integer status){
         this.status = status;
+    }
+
+    public Integer getDelFlag(){
+	    return  delFlag;
+    }
+    public void setDelFlag(Integer delFlag){
+        this.delFlag = delFlag;
     }
 
     public Date getCreatetime(){

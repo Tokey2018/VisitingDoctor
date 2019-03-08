@@ -24,7 +24,7 @@ import org.beetl.sql.core.annotatoin.LogicDelete;
 
 /* 
 * 
-* gen by Spring Boot2 Admin 2019-02-23
+* gen by Spring Boot2 Admin 2019-03-04
 */
 public class TMedicalRecord extends BaseEntity{
 
@@ -48,6 +48,12 @@ public class TMedicalRecord extends BaseEntity{
 	
 
     private String filepath ;
+	
+	/*逻辑删除标志*/
+	@InsertIgnore
+	@LogicDelete(value = 1)
+
+    private Integer delFlag ;
 	
 
     private Date createtime ;
@@ -96,6 +102,13 @@ public class TMedicalRecord extends BaseEntity{
     }
     public void setFilepath(String filepath){
         this.filepath = filepath;
+    }
+
+    public Integer getDelFlag(){
+	    return  delFlag;
+    }
+    public void setDelFlag(Integer delFlag){
+        this.delFlag = delFlag;
     }
 
     public Date getCreatetime(){

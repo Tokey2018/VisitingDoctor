@@ -84,6 +84,22 @@
     <div class="layui-row">
         <div class="layui-form-item">
             <div class="layui-inline">
+            <label class="layui-form-label">visittimes</label>
+				<div class="layui-input-inline">
+					<input type="text" id="visittimes" name="visittimes"  value="${tTreatment.visittimes}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">diagtimes</label>
+				<div class="layui-input-inline">
+					<input type="text" id="diagtimes" name="diagtimes"  value="${tTreatment.diagtimes}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
             <label class="layui-form-label">createtime</label>
 				<div class="layui-input-inline">
 					<input type="text" id="createtime" name="createtime"  value="${tTreatment.createtime,"yyyy-MM-dd"}"   class="layui-input input-date" >
@@ -92,6 +108,7 @@
         </div>
     </div>
 	<!-- 业务对象须有hidden字段，保存delFlag和version字段-->
+	<input type="hidden" name="delFlag" value=${tTreatment.delFlag} />
     <input type="hidden" name="rid" value=${tTreatment.rid} />
     <layui:submitButtons id="updateButton" />
 </form>

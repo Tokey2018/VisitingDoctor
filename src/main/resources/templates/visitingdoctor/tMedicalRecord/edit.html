@@ -41,6 +41,10 @@
 					<input type="text" id="filepath" name="filepath"  value="${tMedicalRecord.filepath}"   class="layui-input" >
 				</div>
             </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
             <div class="layui-inline">
             <label class="layui-form-label">createtime</label>
 				<div class="layui-input-inline">
@@ -50,6 +54,7 @@
         </div>
     </div>
 	<!-- 业务对象须有hidden字段，保存delFlag和version字段-->
+	<input type="hidden" name="delFlag" value=${tMedicalRecord.delFlag} />
     <input type="hidden" name="rid" value=${tMedicalRecord.rid} />
     <layui:submitButtons id="updateButton" />
 </form>
