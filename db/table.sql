@@ -14,6 +14,7 @@ create table t_visit(
   createTime    datetime NOT NULL DEFAULT now(),
   primary key (rid)
 );
+create index t_visit_idx1 on t_visit(patientId);
 
 drop table if exists t_treatment;
 create table t_treatment(
@@ -34,6 +35,8 @@ create table t_treatment(
   createTime    datetime NOT NULL DEFAULT now(),
   primary key (rid)
 );
+create index t_treatment_idx1 on t_treatment(doctorId);
+create index t_treatment_idx2 on t_treatment(symptomFlags1, imMode, medicineType, treatmentType);
 
 drop table if exists t_diagnosis;
 create table t_diagnosis(
@@ -53,6 +56,7 @@ create table t_diagnosis(
   createTime    datetime NOT NULL DEFAULT now(),
   primary key (rid)
 );
+create unique index t_diagnosis_idx1 on t_diagnosis(patientId, doctorId);
 
 drop table if exists t_medical_record;
 create table t_medical_record(
@@ -66,3 +70,4 @@ create table t_medical_record(
   createTime    datetime NOT NULL DEFAULT now(),
   primary key (rid)
 );
+create index t_medical_record_idx1 on t_medical_record(diagnosisId);

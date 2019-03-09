@@ -8,6 +8,7 @@ import com.tokeys.visitingdoctor.entity.TTreatment;
 import com.tokeys.visitingdoctor.entity.TVisit;
 import com.tokeys.visitingdoctor.model.Condition;
 import com.tokeys.visitingdoctor.model.Doctor;
+import com.tokeys.visitingdoctor.model.User;
 import com.tokeys.visitingdoctor.service.InterrogationService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -40,6 +41,7 @@ public class TTestController {
         doc.setName("测试医生");
         doc.setDegree(3);
         Condition cond = new Condition();
+        cond.setSymptomFlags(new long[]{1});
         cond.setImMode(1);
         cond.setMedicineType(2);
         cond.setTreatmentType(3);
@@ -62,9 +64,9 @@ public class TTestController {
         doc.setRid(1);
         doc.setName("测试医生");
         doc.setDegree(3);
-
-        if(tInterrogationService.stopWork(doc))
-            return  JsonResult.successMessage("stopWork suceed");
+        TTreatment treat = tInterrogationService.stopWork(doc);
+        if(treat != null)
+            return  JsonResult.success(treat);
         else
             return JsonResult.failMessage("startWork failed");
     }
@@ -78,8 +80,8 @@ public class TTestController {
         visit.setPatientid(1l);
         visit.setSymptomflags1(1l);
         visit.setImmode(1);
-        visit.setMedicinetype(1);
-        visit.setTreatmenttype(1);
+        visit.setMedicinetype(2);
+        visit.setTreatmenttype(3);
         visit.setStarttime(new Date());
         visit.setEndtime(new Date());
         List<Long> doctors = tInterrogationService.searchHistoryDoctor(visit);
@@ -112,14 +114,7 @@ public class TTestController {
     @ResponseBody
     public JsonResult<TTreatment> matchDoctor() {
         TVisit visit = new TVisit();
-        visit.setPatientid(1l);
-        visit.setSymptomflags1(1l);
-        visit.setImmode(1);
-        visit.setMedicinetype(1);
-        visit.setTreatmenttype(1);
-        visit.setStarttime(new Date());
-        visit.setEndtime(new Date());
-
+        visit.setRid(1l);
         List<TTreatment> treats = tInterrogationService.matchDoctor(visit);
         if(treats == null)
             return JsonResult.failMessage("match doctor error");
@@ -132,13 +127,13 @@ public class TTestController {
     @GetMapping(MODEL + "/setTreatmentStatus")
     @Function("test.InterrogationService.setTreatmentStatus")
     @ResponseBody
-    public JsonResult<String> setTreatmentStatus() {
+    public JsonResult<TTreatment> setTreatmentStatus() {
         TTreatment treat = new TTreatment();
         treat.setDoctorid(1l);
         treat.setStatus(2);
-
-        if(tInterrogationService.setTreatmentStatus(treat))
-            return JsonResult.success("OK");
+        treat = tInterrogationService.setTreatmentStatus(treat);
+        if(treat != null)
+            return JsonResult.success(treat);
         else
             return JsonResult.failMessage("error");
     }
@@ -148,11 +143,7 @@ public class TTestController {
     @ResponseBody
     public JsonResult<TDiagnosis> acceptPatient() {
         TVisit visit = new TVisit();
-        visit.setPatientid(1l);
-        visit.setSymptomflags1(1l);
-        visit.setImmode(1);
-        visit.setMedicinetype(1);
-        visit.setTreatmenttype(1);
+        visit.setRid(1l);
         TTreatment treat = new TTreatment();
         treat.setRid(1l);
         TDiagnosis dg = tInterrogationService.acceptPatient(visit, treat);
@@ -166,13 +157,14 @@ public class TTestController {
     @GetMapping(MODEL + "/cancelDiagnosis")
     @Function("test.InterrogationService.cancelDiagnosis")
     @ResponseBody
-    public JsonResult<String> cancelDiagnosis() {
+    public JsonResult<TDiagnosis> cancelDiagnosis() {
         TDiagnosis dg = new TDiagnosis();
         dg.setRid(1l);
-        if(!tInterrogationService.cancelDiagnosis(dg, TDiagnosis.CANCEL)){
+        dg = tInterrogationService.cancelDiagnosis(dg, TDiagnosis.CANCEL);
+        if(dg == null){
             return JsonResult.failMessage("cancel patient failed");
         }else{
-            return JsonResult.success("cancel diagnosis succeed");
+            return JsonResult.success(dg);
         }
     }
 
@@ -185,7 +177,7 @@ public class TTestController {
         dg.setPatientid(1l);
 
         TMedicalRecord mr = new TMedicalRecord();
-        mr.setRecordype(1);
+        mr.setRecordype(TMedicalRecord.DIAGNOSIS);
         mr.setFilename("test file");
         mr.setFiletype("test type");
         mr.setFilepath("test path");
@@ -194,6 +186,29 @@ public class TTestController {
             return JsonResult.failMessage("cancel patient failed");
         }else{
             return JsonResult.success(mr);
+        }
+    }
+
+    @GetMapping(MODEL + "/makeVisit")
+    @Function("test.InterrogationService.makeVisit")
+    @ResponseBody
+    public JsonResult<TVisit> makeVisit() {
+        User user = new User();
+        user.setRid(1);
+        user.setName("test");
+        Condition cond = new Condition();
+        cond.setSymptomFlags(new long[]{1});
+        cond.setImMode(1);
+        cond.setMedicineType(2);
+        cond.setTreatmentType(3);
+        cond.setTimeType(1);
+        cond.setStartTime(new Date());
+        cond.setEndTime( new Date(System.currentTimeMillis() + 60 * 60 * 1000));
+        TVisit visit = tInterrogationService.makeVisit(user, cond);
+        if(visit == null){
+            return JsonResult.failMessage("cancel patient failed");
+        }else{
+            return JsonResult.success(visit);
         }
     }
 

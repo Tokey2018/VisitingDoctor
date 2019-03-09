@@ -27,6 +27,7 @@ import org.beetl.sql.core.annotatoin.LogicDelete;
 * gen by Spring Boot2 Admin 2019-03-04
 */
 public class TMedicalRecord extends BaseEntity{
+    public static final int DIAGNOSIS = 1;
 
     @NotNull(message = "ID不能为空", groups =ValidateConfig.UPDATE.class)
     @SeqID(name = ORACLE_CORE_SEQ_NAME)

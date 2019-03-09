@@ -30,6 +30,7 @@ public class TDiagnosis extends BaseEntity{
     public static final int NORMAL = 1;
     public static final int PAUSE = 2;
     public static final int CANCEL = 3;
+    public static final int FINISH = 4;
 
     @NotNull(message = "ID不能为空", groups =ValidateConfig.UPDATE.class)
     @SeqID(name = ORACLE_CORE_SEQ_NAME)

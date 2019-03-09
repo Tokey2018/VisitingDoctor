@@ -32,5 +32,4 @@ select * from t_treatment where del_flag=0 and (symptomFlags1 & #symptomflags1# 
    and imMode=#immode# and medicineType=#medicinetype# and treatmentType=#treatmenttype#
    and ((startTime<=#starttime# and endTime>=#starttime#)
        or (startTime<=#endtime# and endTime>=#endtime#))
-   and diagTimes=1
    order by diagTimes, visitTimes desc
