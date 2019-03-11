@@ -109,12 +109,12 @@ public class InterrogationService extends BaseService<TDiagnosis>{
             logger.info("parameter is invalid");
             return null;
         }
-        visit = tVisitDao.single(visit.getRid());
-        if(visit == null){
+        TVisit v = tVisitDao.single(visit.getRid());
+        if(v == null){
             logger.info("visit {} is invalid", visit.getRid());
             return null;
         }
-        List<TTreatment> treats = tTreatmentDao.matchDoctor(visit);
+        List<TTreatment> treats = tTreatmentDao.matchDoctor(v);
         if(treats == null){
             logger.warn("match doctor error");
             return null;
@@ -205,19 +205,19 @@ public class InterrogationService extends BaseService<TDiagnosis>{
             logger.info("parameter is invalid");
             return null;
         }
-        TTreatment treatment = getDoctorTreatment(treat.getDoctorid());
-        if(treatment == null){
+        TTreatment t = getDoctorTreatment(treat.getDoctorid());
+        if(t == null){
             logger.info("search no treatment for doctor {}", treat.getDoctorid());
             return null;
         }
-        treatment.setStatus(treat.getStatus());
+        t.setStatus(t.getStatus());
         try {
-            tTreatmentDao.updateById(treatment);
+            tTreatmentDao.updateById(t);
         }catch(Exception e){
-            logger.error("update treatment of {} error: {}", treatment.getRid(), e.getMessage());
+            logger.error("update treatment of {} error: {}", t.getRid(), e.getMessage());
             return null;
         }
-        return treat;
+        return t;
     }
 
     public TDiagnosis acceptPatient(TVisit visit, TTreatment treat){
@@ -225,35 +225,35 @@ public class InterrogationService extends BaseService<TDiagnosis>{
             logger.info("parameter is invalid");
             return null;
         }
-        visit = tVisitDao.single(visit.getRid());
-        if(visit == null){
+        TVisit v = tVisitDao.single(visit.getRid());
+        if(v == null){
             logger.info("get visit {} failed", visit.getRid());
             return null;
         }
-        treat = tTreatmentDao.single(treat.getRid());
-        if(treat == null){
+        TTreatment t = tTreatmentDao.single(treat.getRid());
+        if(t == null){
             logger.info("get treatment {} failed", treat.getRid());
             return null;
         }
-        treat.setVisittimes(treat.getVisittimes() + 1);
+        t.setVisittimes(t.getVisittimes() + 1);
         try{
-            tTreatmentDao.updateById(treat);
+            tTreatmentDao.updateById(t);
         }catch(Exception e){
             logger.error("update visit times for doctor {} error: {}", treat.getDoctorid(), e.getMessage());
             return null;
         }
 
         TDiagnosis dg = new TDiagnosis();
-        dg.setPatientid(visit.getPatientid());
-        dg.setPatientname(visit.getPatientname());
-        dg.setDoctorid(treat.getDoctorid());
-        dg.setDoctorname(treat.getDoctorname());
-        dg.setSymptomflags1(visit.getSymptomflags1());
-        dg.setImmode(visit.getImmode());
-        dg.setMedicinetype(visit.getMedicinetype());
-        dg.setTreatmenttype(visit.getTreatmenttype());
-        dg.setStarttime(visit.getStarttime());
-        dg.setEndtime(visit.getEndtime());
+        dg.setPatientid(v.getPatientid());
+        dg.setPatientname(v.getPatientname());
+        dg.setDoctorid(t.getDoctorid());
+        dg.setDoctorname(t.getDoctorname());
+        dg.setSymptomflags1(v.getSymptomflags1());
+        dg.setImmode(v.getImmode());
+        dg.setMedicinetype(v.getMedicinetype());
+        dg.setTreatmenttype(v.getTreatmenttype());
+        dg.setStarttime(v.getStarttime());
+        dg.setEndtime(v.getEndtime());
         dg.setStatus(TDiagnosis.NORMAL);
         try {
             tDiagnosisDao.insert(dg, true);
@@ -269,19 +269,19 @@ public class InterrogationService extends BaseService<TDiagnosis>{
             logger.info("parameter is invalid");
             return null;
         }
-        diag = tDiagnosisDao.single(diag.getRid());
-        if(diag == null){
+        TDiagnosis d = tDiagnosisDao.single(diag.getRid());
+        if(d == null){
             logger.info("get diagnosis {} failed", diag.getRid());
             return null;
         }
-        diag.setStatus(flag);
+        d.setStatus(flag);
         try {
-            tDiagnosisDao.updateById(diag);
+            tDiagnosisDao.updateById(d);
         }catch(Exception e){
             logger.error("update diagnosis status error: {}", e.getMessage());
             return null;
         }
-        return diag;
+        return d;
     }
 
     public TMedicalRecord makeRecord(TDiagnosis diag, TMedicalRecord mr){
@@ -289,13 +289,13 @@ public class InterrogationService extends BaseService<TDiagnosis>{
             logger.info("parameter is invalid");
             return null;
         }
-        diag = tDiagnosisDao.single(diag.getRid());
-        if(diag == null){
+        TDiagnosis d = tDiagnosisDao.single(diag.getRid());
+        if(d == null){
             logger.warn("diagnosis {} is invalid", diag.getRid());
             return null;
         }
 
-        mr.setDiagnosisid(diag.getRid());
+        mr.setDiagnosisid(d.getRid());
         try {
             tMedicalRecordDao.insert(mr, true);
         }catch(Exception e){
@@ -304,15 +304,16 @@ public class InterrogationService extends BaseService<TDiagnosis>{
         }
         if(mr.getRecordype() == TMedicalRecord.DIAGNOSIS){
             try{
-                tDiagnosisDao.updateById(diag);
+                d.setStatus(TDiagnosis.FINISH);
+                tDiagnosisDao.updateById(d);
             }catch(Exception e){
-                logger.error("update diagnosis {} error: {}", diag.getRid(), e.getMessage());
+                logger.error("update diagnosis {} error: {}", d.getRid(), e.getMessage());
                 return null;
             }
 
-            TTreatment treat = getDoctorTreatment(diag.getDoctorid());
+            TTreatment treat = getDoctorTreatment(d.getDoctorid());
             if(treat == null){
-                logger.warn("get treatment of doctor {} error", diag.getDoctorid());
+                logger.warn("get treatment of doctor {} error", d.getDoctorid());
                 return null;
             }
             treat.setDiagtimes(treat.getDiagtimes() + 1);

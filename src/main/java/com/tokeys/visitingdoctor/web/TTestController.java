@@ -181,7 +181,6 @@ public class TTestController {
         mr.setFilename("test file");
         mr.setFiletype("test type");
         mr.setFilepath("test path");
-        mr.setCreatetime(new Date());
         if(tInterrogationService.makeRecord(dg, mr) == null){
             return JsonResult.failMessage("cancel patient failed");
         }else{
