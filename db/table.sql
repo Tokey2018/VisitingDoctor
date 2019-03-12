@@ -45,6 +45,8 @@ create table t_diagnosis(
   patientName   varchar(30),
   doctorId      bigint NOT NULL,
   doctorName    varchar(30),
+  visitId       bigint NOT NULL,
+  treatmentId   bigint NOT NULL,
   symptomFlags1 bigint NOT NULL DEFAULT 0,
   imMode        int NOT NULL DEFAULT 0,
   medicineType  int NOT NULL DEFAULT 0,
@@ -56,7 +58,7 @@ create table t_diagnosis(
   createTime    datetime NOT NULL DEFAULT now(),
   primary key (rid)
 );
-create unique index t_diagnosis_idx1 on t_diagnosis(patientId, doctorId);
+create unique index t_diagnosis_idx1 on t_diagnosis(visitId, treatmentId);
 
 drop table if exists t_medical_record;
 create table t_medical_record(

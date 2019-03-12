@@ -49,6 +49,10 @@ public class TDiagnosis extends BaseEntity{
 	
 
     private String doctorname ;
+
+    private Long visitid;
+
+    private Long treatmentid;
 	
 
     private Long symptomflags1 ;
@@ -120,6 +124,22 @@ public class TDiagnosis extends BaseEntity{
         this.doctorname = doctorname;
     }
 
+    public Long getVisitid() {
+        return visitid;
+    }
+
+    public void setVisitid(Long visitid) {
+        this.visitid = visitid;
+    }
+
+    public Long getTreatmentid() {
+        return treatmentid;
+    }
+
+    public void setTreatmentid(Long treatmentid) {
+        this.treatmentid = treatmentid;
+    }
+
     public Long getSymptomflags1(){
 	    return  symptomflags1;
     }
@@ -182,6 +202,5 @@ public class TDiagnosis extends BaseEntity{
     public void setCreatetime(Date createtime){
         this.createtime = createtime;
     }
-
 
 }

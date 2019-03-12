@@ -248,6 +248,8 @@ public class InterrogationService extends BaseService<TDiagnosis>{
         dg.setPatientname(v.getPatientname());
         dg.setDoctorid(t.getDoctorid());
         dg.setDoctorname(t.getDoctorname());
+        dg.setVisitid(v.getRid());
+        dg.setTreatmentid(t.getRid());
         dg.setSymptomflags1(v.getSymptomflags1());
         dg.setImmode(v.getImmode());
         dg.setMedicinetype(v.getMedicinetype());

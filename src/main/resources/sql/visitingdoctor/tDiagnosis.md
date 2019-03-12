@@ -27,6 +27,6 @@ searchHistoryDoctor
 select doctorId from t_diagnosis where del_flag=0 
     and patientId=#patientid# and (symptomFlags1 & #symptomflags1# > 0)
     and imMode=#immode# and medicineType=#medicinetype# and treatmentType=#treatmenttype#
-    and ((startTime<=#starttime# and endTime>=#starttime#)
-        or (startTime<=#endtime# and endTime>=#endtime#))
-    group by doctorId
+    and createTime>=#starttime# and createTime<=#endtime#
+    group by doctorId, createTime
+    order by createTime desc

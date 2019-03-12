@@ -232,7 +232,7 @@ public class TInterrogationController {
         cond.setEndTime(visit.getEndtime());
         TVisit v = tInterrogationService.makeVisit(user, cond);
         if(v == null){
-            return JsonResult.failMessage("cancel patient failed");
+            return JsonResult.failMessage("make visit failed");
         }else{
             return JsonResult.success(v);
         }
