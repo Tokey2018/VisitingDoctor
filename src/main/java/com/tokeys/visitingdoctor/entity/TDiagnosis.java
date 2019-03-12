@@ -6,8 +6,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
-import org.beetl.sql.core.annotatoin.AutoID;
-import org.beetl.sql.core.annotatoin.SeqID;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import org.beetl.sql.core.annotatoin.*;
 
 import com.ibeetl.admin.core.util.ValidateConfig;
 
@@ -17,15 +17,12 @@ import java.math.*;
 import com.ibeetl.admin.core.annotation.Dict;
 import com.ibeetl.admin.core.entity.BaseEntity;
 
-import org.beetl.sql.core.annotatoin.InsertIgnore;
-import org.beetl.sql.core.annotatoin.Version;
-import org.beetl.sql.core.annotatoin.LogicDelete;
-
 
 /* 
 * 
 * gen by Spring Boot2 Admin 2019-03-04
 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TDiagnosis extends BaseEntity{
     public static final int NORMAL = 1;
     public static final int PAUSE = 2;
@@ -34,7 +31,7 @@ public class TDiagnosis extends BaseEntity{
 
     @NotNull(message = "ID不能为空", groups =ValidateConfig.UPDATE.class)
     @SeqID(name = ORACLE_CORE_SEQ_NAME)
-    @AutoID	
+    @AssignID("simple")
 
     private Long rid ;
 	

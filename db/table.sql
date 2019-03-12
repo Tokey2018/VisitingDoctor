@@ -1,6 +1,6 @@
 drop table if exists t_visit;
 create table t_visit(
-  rid           bigint NOT NULL AUTO_INCREMENT,
+  rid           bigint NOT NULL,
   patientId     bigint NOT NULL,
   patientName   varchar(30),
   symptomFlags1 bigint NOT NULL DEFAULT 0,
@@ -18,7 +18,7 @@ create index t_visit_idx1 on t_visit(patientId);
 
 drop table if exists t_treatment;
 create table t_treatment(
-  rid           bigint NOT NULL AUTO_INCREMENT,
+  rid           bigint NOT NULL,
   doctorId      bigint NOT NULL,
   doctorName    varchar(30),
   symptomFlags1 bigint NOT NULL DEFAULT 0,
@@ -40,7 +40,7 @@ create index t_treatment_idx2 on t_treatment(symptomFlags1, imMode, medicineType
 
 drop table if exists t_diagnosis;
 create table t_diagnosis(
-  rid           bigint NOT NULL AUTO_INCREMENT,
+  rid           bigint NOT NULL,
   patientId     bigint NOT NULL,
   patientName   varchar(30),
   doctorId      bigint NOT NULL,
@@ -62,7 +62,7 @@ create unique index t_diagnosis_idx1 on t_diagnosis(visitId, treatmentId);
 
 drop table if exists t_medical_record;
 create table t_medical_record(
-  rid           bigint NOT NULL AUTO_INCREMENT,
+  rid           bigint NOT NULL,
   diagnosisId   bigint NOT NULL,
   recordype     int NOT NULL DEFAULT 0,
   fileName      varchar(100),
